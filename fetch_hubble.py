@@ -22,10 +22,8 @@ def convert_image(file_name):
 
     image = Image.open(os.getenv("DOWNLOAD_FOLDER") + '\\' + file_name)
     image.thumbnail((1080, 1080))
-    try:
-        image.save(os.getenv("CONVERTED_FOLDER") + '\\' + os.path.splitext(file_name)[-2] + '.jpg', format='JPEG')
-    except:
-        pass
+    image.save(os.getenv("CONVERTED_FOLDER") + '\\' + os.path.splitext(file_name)[-2] + '.jpg', format='JPEG')
+
 
 def download_image_by_id(id):
     url = r'http://hubblesite.org/api/v3/image/{}'.format(id)
@@ -38,7 +36,7 @@ def download_image_by_id(id):
     try:
         download_file(file_url, file_name)
         convert_image(file_name)
-    except:
+    except Exception:
         pass
 
 
