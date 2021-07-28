@@ -10,11 +10,9 @@ def download_image_by_id(id):
     image = response.json().get('image_files')[-1]
     file_url = 'https:{}'.format(image.get('file_url'))
     file_name = f'{str(id)}{file_functions.get_file_extension(file_url)}'
-    try:
-        file_functions.download_file(file_url, file_name)
-        file_functions.convert_image(file_name)
-    except Exception:
-        pass
+    file_functions.download_file(file_url, file_name)
+    file_functions.convert_image(file_name)
+
 
 
 if __name__ == '__main__':
@@ -23,4 +21,8 @@ if __name__ == '__main__':
     response.raise_for_status()
     images = response.json()
     for image in images:
-        download_image_by_id(image['id'])
+        try:
+            download_image_by_id(image['id'])
+        except:
+            print("Ошибка при загрузке/конвертации файла файла")
+
