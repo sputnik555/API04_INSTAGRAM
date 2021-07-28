@@ -2,6 +2,7 @@ import os
 import requests
 from PIL import Image
 
+
 def download_file(url, file_name):
     response = requests.get(url, verify=False)
     response.raise_for_status()
