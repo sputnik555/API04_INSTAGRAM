@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 if __name__ == '__main__':
     load_dotenv()
 
-    pics = glob.glob(os.getenv("CONVERTED_FOLDER") + "/*.jpg")
+    pics = glob.glob('{}/*.jpg'.format(os.getenv("CONVERTED_FOLDER")))
 
     bot = Bot()
     bot.login(username=os.getenv("INSTAGRAM_LOGIN"), password=os.getenv("INSTAGRAM_PASSWORD"), use_cookie=False)

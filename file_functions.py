@@ -22,7 +22,7 @@ def convert_image(file_name):
     converted_path = make_dir(os.getenv("CONVERTED_FOLDER"))
     image = Image.open(Path(os.getenv("DOWNLOAD_FOLDER")) / file_name)
     image.thumbnail((IMAGE_SIZE, IMAGE_SIZE))
-    image.save(converted_path / (os.path.splitext(file_name)[-2] + '.jpg'), format='JPEG')
+    image.save(converted_path / '{}.jpg'.format(os.path.splitext(file_name)[-2]), format='JPEG')
 
 
 def get_url_tail(url):

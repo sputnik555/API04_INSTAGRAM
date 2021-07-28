@@ -1,7 +1,6 @@
 import requests
-from dotenv import load_dotenv
 import file_functions
-
+from dotenv import load_dotenv
 
 def fetch_spacex_last_launch():
     response = requests.get('https://api.spacexdata.com/v4/launches/latest')
