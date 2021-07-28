@@ -12,15 +12,15 @@ IMAGE_SIZE = 1080
 def download_file(url, file_name):
     response = requests.get(url, verify=False)
     response.raise_for_status()
-    download_path = make_dir(os.getenv("DOWNLOAD_FOLDER"))
+    download_path = make_dir(os.getenv('DOWNLOAD_FOLDER'))
 
     with open(download_path / file_name, 'wb') as file:
         file.write(response.content)
 
 
 def convert_image(file_name):
-    converted_path = make_dir(os.getenv("CONVERTED_FOLDER"))
-    image = Image.open(Path(os.getenv("DOWNLOAD_FOLDER")) / file_name)
+    converted_path = make_dir(os.getenv('CONVERTED_FOLDER'))
+    image = Image.open(Path(os.getenv('DOWNLOAD_FOLDER')) / file_name)
     image.thumbnail((IMAGE_SIZE, IMAGE_SIZE))
     image.save(converted_path / '{}.jpg'.format(os.path.splitext(file_name)[-2]), format='JPEG')
 
