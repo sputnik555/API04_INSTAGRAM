@@ -1,6 +1,6 @@
 # Космический Инстаграм
 
-Скрипт загружает фотографии из официальных API компании SpaceX и телескопа Hubble и публикует их в Instagram
+Скрипт загружает фотографии из официальных API компании SpaceX и телескопа Hubble и публикует их в Instagram.
 
 ### Как установить
 
@@ -20,9 +20,9 @@ pip install -r requirements.txt
 
 Для запуска доступны 3 файла скрипта:
 
-`fetch_hubble.py` - загружает и конвертирует фотографии телескопа Hubble  
-`fetch_spacex.py` - загружает и конвертирует фотографии последнего запуска SpaceX  
-`post_photos_in_instagram.py` - публикует изображения из папки CONVERTED_FOLDER в Instagram 
+`fetch_hubble.py` - загружает и конвертирует фотографии телескопа Hubble.  
+`fetch_spacex.py` - загружает и конвертирует фотографии последнего запуска SpaceX.  
+`post_photos_in_instagram.py` - публикует изображения из папки CONVERTED_FOLDER в Instagram. 
 
 
 
