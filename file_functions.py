@@ -2,27 +2,29 @@ import os
 import requests
 import urllib.parse
 import os.path
+from pathlib import Path
 from PIL import Image
 
 
 def download_file(url, file_name):
     response = requests.get(url, verify=False)
     response.raise_for_status()
+    download_path = Path(os.getenv("DOWNLOAD_FOLDER"))
+    if not download_path.exists():
+        download_path.mkdir()
 
-    if not os.path.exists(os.getenv("DOWNLOAD_FOLDER")):
-        os.makedirs(os.getenv("DOWNLOAD_FOLDER"))
-
-    with open(os.getenv("DOWNLOAD_FOLDER") + '\\' + file_name, 'wb') as file:
+    with open(download_path / file_name, 'wb') as file:
         file.write(response.content)
 
 
 def convert_image(file_name):
-    if not os.path.exists(os.getenv("CONVERTED_FOLDER")):
-        os.makedirs(os.getenv("CONVERTED_FOLDER"))
+    converted_path = Path(os.getenv("CONVERTED_FOLDER"))
+    if not converted_path.exists():
+        converted_path.mkdir()
 
-    image = Image.open(os.getenv("DOWNLOAD_FOLDER") + '\\' + file_name)
+    image = Image.open(Path(os.getenv("DOWNLOAD_FOLDER")) / file_name)
     image.thumbnail((1080, 1080))
-    image.save(os.getenv("CONVERTED_FOLDER") + '\\' + os.path.splitext(file_name)[-2] + '.jpg', format='JPEG')
+    image.save(converted_path / (os.path.splitext(file_name)[-2] + '.jpg'), format='JPEG')
 
 
 def get_url_tail(url):
