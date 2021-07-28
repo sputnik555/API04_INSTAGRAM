@@ -6,6 +6,9 @@ from pathlib import Path
 from PIL import Image
 
 
+IMAGE_SIZE = 1080
+
+
 def download_file(url, file_name):
     response = requests.get(url, verify=False)
     response.raise_for_status()
@@ -23,7 +26,7 @@ def convert_image(file_name):
         converted_path.mkdir()
 
     image = Image.open(Path(os.getenv("DOWNLOAD_FOLDER")) / file_name)
-    image.thumbnail((1080, 1080))
+    image.thumbnail((IMAGE_SIZE, IMAGE_SIZE))
     image.save(converted_path / (os.path.splitext(file_name)[-2] + '.jpg'), format='JPEG')
 
 
