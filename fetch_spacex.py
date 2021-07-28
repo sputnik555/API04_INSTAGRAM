@@ -9,8 +9,9 @@ def fetch_spacex_last_launch():
     images_links = response.json().get('links').get('flickr').get('original')
 
     for image in images_links:
-        file_functions.download_file(image, image.split('/')[-1])
-        file_functions.convert_image(image.split('/')[-1])
+        file_name = file_functions.get_url_tail(image)
+        file_functions.download_file(image, file_name)
+        file_functions.convert_image(file_name)
 
 
 if __name__ == '__main__':

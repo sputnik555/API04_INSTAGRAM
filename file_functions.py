@@ -1,5 +1,7 @@
 import os
 import requests
+import urllib.parse
+import os.path
 from PIL import Image
 
 
@@ -21,3 +23,12 @@ def convert_image(file_name):
     image = Image.open(os.getenv("DOWNLOAD_FOLDER") + '\\' + file_name)
     image.thumbnail((1080, 1080))
     image.save(os.getenv("CONVERTED_FOLDER") + '\\' + os.path.splitext(file_name)[-2] + '.jpg', format='JPEG')
+
+
+def get_url_tail(url):
+    url_path = urllib.parse.urlparse(url).path
+    return os.path.split(url_path)[-1]
+
+
+def get_file_extension(url):
+    return os.path.splitext(urllib.parse.urlparse(url).path)[-1]
