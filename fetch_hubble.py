@@ -4,9 +4,6 @@ from dotenv import load_dotenv
 import file_functions
 
 
-IMAGE_SIZE = 1080
-
-
 def download_image_by_id(id, download_folder, converted_folder, image_size):
     url = r'http://hubblesite.org/api/v3/image/{}'.format(id)
     response = requests.get(url)
@@ -15,7 +12,6 @@ def download_image_by_id(id, download_folder, converted_folder, image_size):
     file_url = 'https:{}'.format(image.get('file_url'))
     file_name = f'{str(id)}{file_functions.get_file_extension(file_url)}'
     file_functions.download_file(file_url, file_name, download_folder)
-    file_functions.convert_image(file_name, download_folder, converted_folder, image_size)
 
 
 if __name__ == '__main__':
@@ -29,4 +25,4 @@ if __name__ == '__main__':
         try:
             download_image_by_id(image['id'], download_folder, converted_folder, IMAGE_SIZE)
         except:
-            print('Ошибка при загрузке/конвертации файла файла')
+            print('Ошибка при загрузке файла')
