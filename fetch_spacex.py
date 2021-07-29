@@ -1,6 +1,7 @@
 import requests
 import file_functions
 import os
+from requests import HTTPError
 from dotenv import load_dotenv
 
 
@@ -20,5 +21,5 @@ if __name__ == '__main__':
     download_folder = os.getenv('DOWNLOAD_FOLDER')
     try:
         fetch_spacex_last_launch(download_folder)
-    except Exception:
+    except HTTPError:
         print('Ошибка загрузки файлов')

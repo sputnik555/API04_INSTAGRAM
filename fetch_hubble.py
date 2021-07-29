@@ -1,7 +1,9 @@
 import requests
 import os
-from dotenv import load_dotenv
 import file_functions
+from requests import HTTPError
+from dotenv import load_dotenv
+
 
 
 def download_image_by_id(id, download_folder):
@@ -27,5 +29,5 @@ if __name__ == '__main__':
     download_folder = os.getenv('DOWNLOAD_FOLDER')
     try:
         download_collection('holiday_cards', download_folder)
-    except Exception:
+    except HTTPError:
         print('Ошибка при загрузке файла')
