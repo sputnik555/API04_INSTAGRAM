@@ -14,15 +14,18 @@ def download_image_by_id(id, download_folder):
     file_functions.download_file(file_url, file_name, download_folder)
 
 
-if __name__ == '__main__':
-    load_dotenv()
-    converted_folder = os.getenv('CONVERTED_FOLDER')
-    download_folder = os.getenv('DOWNLOAD_FOLDER')
-    response = requests.get('https://hubblesite.org/api/v3/images/holiday_cards')
+def download_collection(collection, download_folder):
+    response = requests.get('https://hubblesite.org/api/v3/images/{}'.format(collection))
     response.raise_for_status()
     images = response.json()
     for image in images:
-        try:
-            download_image_by_id(image['id'], download_folder)
-        except Exception:
-            print('Ошибка при загрузке файла')
+        download_image_by_id(image['id'], download_folder)
+
+
+if __name__ == '__main__':
+    load_dotenv()
+    download_folder = os.getenv('DOWNLOAD_FOLDER')
+    try:
+        download_collection('holiday_cards', download_folder)
+    except Exception:
+        print('Ошибка при загрузке файла')
