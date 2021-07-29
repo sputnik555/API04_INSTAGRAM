@@ -1,4 +1,3 @@
-import os
 import requests
 import urllib.parse
 import os.path
@@ -6,22 +5,19 @@ from pathlib import Path
 from PIL import Image
 
 
-IMAGE_SIZE = 1080
-
-
-def download_file(url, file_name):
+def download_file(url, file_name, download_folder):
     response = requests.get(url, verify=False)
     response.raise_for_status()
-    download_path = make_dir(os.getenv('DOWNLOAD_FOLDER'))
+    download_path = make_dir(download_folder)
 
     with open(download_path / file_name, 'wb') as file:
         file.write(response.content)
 
 
-def convert_image(file_name):
-    converted_path = make_dir(os.getenv('CONVERTED_FOLDER'))
-    image = Image.open(Path(os.getenv('DOWNLOAD_FOLDER')) / file_name)
-    image.thumbnail((IMAGE_SIZE, IMAGE_SIZE))
+def convert_image(file_name, download_folder, converted_folder, image_size):
+    converted_path = make_dir(converted_folder)
+    image = Image.open(Path(download_folder) / file_name)
+    image.thumbnail((image_size, image_size))
     image.save(converted_path / '{}.jpg'.format(os.path.splitext(file_name)[-2]), format='JPEG')
 
 
