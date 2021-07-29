@@ -23,11 +23,13 @@ def convert_image(file_name, download_folder, converted_folder, image_size):
 
 def get_url_tail(url):
     url_path = urllib.parse.urlparse(url).path
-    return os.path.split(url_path)[-1]
+    unquote_url_path = urllib.parse.unquote(url_path)
+    return os.path.split(unquote_url_path)[-1]
 
 
 def get_file_extension(url):
-    return os.path.splitext(urllib.parse.urlparse(url).path)[-1]
+    unqote_url = urllib.parse.unquote(url)
+    return os.path.splitext(urllib.parse.urlparse(unqote_url).path)[-1]
 
 
 def make_dir(dir_name):
