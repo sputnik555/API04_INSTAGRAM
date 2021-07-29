@@ -11,7 +11,7 @@ def download_image_by_id(image_id, download_folder):
     response.raise_for_status()
     image = response.json().get('image_files')[-1]
     file_url = 'https:{}'.format(image.get('file_url'))
-    file_name = f'{str(image_id)}{file_functions.get_file_extension(file_url)}'
+    file_name = f'{image_id}{file_functions.get_file_extension(file_url)}'
     file_functions.download_file(file_url, file_name, download_folder)
 
 
