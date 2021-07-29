@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 def fetch_spacex_last_launch(download_folder):
     response = requests.get('https://api.spacexdata.com/v4/launches/latest')
     response.raise_for_status()
-    images_links = response.json().get('links').get('flickr').get('original')
+    image_links = response.json().get('links').get('flickr').get('original')
 
-    for image in images_links:
+    for image in image_links:
         file_name = file_functions.get_url_tail(image)
         file_functions.download_file(image, file_name, download_folder)
 
