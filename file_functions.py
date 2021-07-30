@@ -5,18 +5,16 @@ from pathlib import Path
 from PIL import Image
 
 
-def download_file(url, file_name, download_folder):
+def download_file(url, file_name, download_path):
     response = requests.get(url, verify=False)
     response.raise_for_status()
-    download_path = make_dir(download_folder)
 
     with open(download_path / file_name, 'wb') as file:
         file.write(response.content)
 
 
-def convert_image(file_name, download_folder, converted_folder, image_size):
-    converted_path = make_dir(converted_folder)
-    image = Image.open(Path(download_folder) / file_name)
+def convert_image(file_name, download_path, converted_path, image_size):
+    image = Image.open(download_path / file_name)
     image.thumbnail((image_size, image_size))
     image.save(converted_path / '{}.jpg'.format(os.path.splitext(file_name)[-2]), format='JPEG')
 
