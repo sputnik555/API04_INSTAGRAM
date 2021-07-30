@@ -28,8 +28,8 @@ def get_url_tail(url):
 
 
 def get_file_extension(url):
-    unqote_url = urllib.parse.unquote(url)
-    return os.path.splitext(urllib.parse.urlparse(unqote_url).path)[-1]
+    unquoted_url = urllib.parse.unquote(url)
+    return os.path.splitext(urllib.parse.urlparse(unquoted_url).path)[-1]
 
 
 def make_dir(dir_name):
