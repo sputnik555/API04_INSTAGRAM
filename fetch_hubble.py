@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 
 def download_image_by_id(image_id, download_path):
-    url = r'http://hubblesite.org/api/v3/image/{}'.format(id)
+    url = 'http://hubblesite.org/api/v3/image/{}'.format(image_id)
     response = requests.get(url)
     response.raise_for_status()
     image = response.json().get('image_files')[-1]
