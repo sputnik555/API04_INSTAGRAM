@@ -21,8 +21,8 @@ def convert_image(file_name, download_path, converted_path, image_size):
 
 def get_url_tail(url):
     url_path = urllib.parse.urlparse(url).path
-    unquote_url_path = urllib.parse.unquote(url_path)
-    return os.path.split(unquote_url_path)[-1]
+    unquoted_url_path = urllib.parse.unquote(url_path)
+    return os.path.split(unquoted_url_path)[-1]
 
 
 def get_file_extension(url):
